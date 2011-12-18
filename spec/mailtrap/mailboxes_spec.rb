@@ -24,10 +24,10 @@ describe Mailtrap::Mailboxes do
     mailboxes.accounts[2].should == 'giraffe@zoo.com'
   end
   
-  it "should extract instances of Mail from mailboxes" do
+  it "should extract instances of Mail::Message from mailboxes" do
     mailboxes = Mailtrap::Mailboxes.new(SAMPLE_LOG_FILENAME)
     recip_mail = mailboxes.get('recipient@test.com')
-    recip_mail.should be_instance_of Mail
+    recip_mail.should be_instance_of Mail::Message
   end
 
   it "should extract mail for recipient from each mailbox" do
@@ -44,9 +44,9 @@ describe Mailtrap::Mailboxes do
     bear_mail.body.should include("Body content B")
     giraffe_mail.body.should include("Body content B")
 
-    mailboxes.get('recipient@test.com').get should be_nil
-    mailboxes.get('bear@zoo.com').get should be_nil
-    mailboxes.get('giraffe@zoo.com').get should be_nil
+    mailboxes.get('recipient@test.com').should be_nil
+    mailboxes.get('bear@zoo.com').should be_nil
+    mailboxes.get('giraffe@zoo.com').should be_nil
     mailboxes.get('no-one@test.com').should be_nil
   end
   

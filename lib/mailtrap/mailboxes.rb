@@ -19,5 +19,9 @@ class Mailtrap
     def accounts
       return @queues.keys
     end
+
+    def get(address)
+      return @queues[address] ? @queues[address].shift : nil
+    end
   end
 end
