@@ -3,9 +3,9 @@ require 'rspec'
 
 require File.join(File.dirname(__FILE__), %w[ .. .. lib mailtrap log_parser ])
 
-LOG_DIR = File.join(File.dirname(__FILE__), 'sample_logs')
-SAMPLE_LOG_FILENAME = File.join(LOG_DIR, 'sample.log')
-SAMPLE_EMPTY_LOG_FILENAME = File.join(LOG_DIR, 'sample_empty.log')
+LOG_DIR ||= File.join(File.dirname(__FILE__), 'sample_logs')
+SAMPLE_LOG_FILENAME ||= File.join(LOG_DIR, 'sample.log')
+SAMPLE_EMPTY_LOG_FILENAME ||= File.join(LOG_DIR, 'sample_empty.log')
 
 describe Mailtrap::LogParser do
   it "should extract two emails from the sample log file" do
