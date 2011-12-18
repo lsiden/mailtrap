@@ -1,0 +1,31 @@
+## Forked from:
+### mailtrap
+
+    by Matt Mower <self@mattmower.com>
+    http://matt.blogs.it/
+
+## BACKGROUND:
+
+My goal is to let mailtrap write to a temporary datastore (ds) 
+such that ds such that if your app sent an e-mail to tarzan@jungle.com,
+then ds.next("tarzan@jungle.com") will remove and return the oldest message for tarzan.  
+
+In other words,
+I wanted *mailtrap* to write to multiple queues,
+one for each addressee,
+so that your test script can then fetch the e-mails
+it's sent to various fictitious users 
+to test assertions on them.
+
+After getting the specs for this gem to run again, I found out that mailtrap has been largely 
+supplanted by Mikel Lindsaar's excellent [mail](https://github.com/mikel/mail).
+Rather than fork *mail*,
+I created [mail-store-agent](https://github.com/lsiden/mail-store-agent)
+which can be given as an argument to Mail::TestMailer.deliveries=()
+and provide the same functionality this fork was intended to provide.
+
+I'll leave this up here for now, in case someone else finds something useful.
+
+## SEE
+* https://github.com/mmower/mailtrap
+* https://github.com/lsiden/mail-store-agent
