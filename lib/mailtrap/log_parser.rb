@@ -8,12 +8,16 @@ require 'mail'
 class Mailtrap
   class LogParser
     class << self
-      # Reads a file by its filename and returns an array of Mail objects
-      def parse(filename)
-        emails = nil
+      # Reads a file by its filename or reads an IO and returns an array of Mail objects
+      def parse(arg)
+        emails = []
       
-        File.open(filename, "r") do |f|
-          emails = extract_messages(f.readlines)
+        if (arg.kind_of? String) then
+          File.open(arg, "r") do |f|
+            emails = extract_messages(f.readlines)
+          end
+        elsif (arg.kind_of? IO) then
+          emails = extract_messages(arg.readlines)
         end
       
         emails.map { |email| Mail.new(email) }
