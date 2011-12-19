@@ -1,5 +1,17 @@
 require 'mail'
 
+class IO
+  # returns array of String
+  def readlines_nonblocking
+    text = ''
+    begin
+      while (text << self.read_nonblock(4096)) do ; end
+    rescue IO::WaitReadable
+    end
+    text.split("\n")
+  end
+end
+
 # Class to read a Mailtrap log file and extract the emails,
 # returning them as Mail objects.  (Interim solution until
 # we can get Mailtrap outputting structured log files.)
@@ -17,7 +29,7 @@ class Mailtrap
             emails = extract_messages(f.readlines)
           end
         elsif (arg.kind_of? IO) then
-          emails = extract_messages(arg.readlines)
+          emails = extract_messages(arg.readlines_nonblocking)
         end
       
         emails.map { |email| Mail.new(email) }

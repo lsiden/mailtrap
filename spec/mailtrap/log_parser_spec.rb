@@ -57,7 +57,6 @@ describe Mailtrap::LogParser do
   end
 
   it "should know how to read mail from an IO object" do
-    pending
     rd, wr = IO.pipe
       File.open(SAMPLE_LOG_FILENAME) do |sample_log|
         wr.write(sample_log.read).should > 0
