@@ -50,7 +50,7 @@ describe Mailtrap::Mailboxes do
     mailboxes.get('no-one@test.com').should be_nil
   end
   
-  it "should return new messages added after it has been opened" do
+  it "should return new messages that arrive even after it has been opened" do
     pending
   end
 end
